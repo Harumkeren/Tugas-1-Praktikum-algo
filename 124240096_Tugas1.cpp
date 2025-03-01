@@ -29,7 +29,6 @@ int partition(int awal, int akhir) {
     swap(barang[i + 1], barang[akhir]);
     return i + 1;
 }
-
 void quick_sort(int awal, int akhir) {
     if (awal < akhir) {
         int pivot = partition(awal, akhir);
@@ -37,30 +36,22 @@ void quick_sort(int awal, int akhir) {
         quick_sort(pivot + 1, akhir);
     }
 }
-
-void sequential_search(int key) {
-    bool found = false;
-    for (int i = 0; i < jumlahData; i++) {
-        if (barang[i].harga == key ) {
-            cout << "\nData ditemukan:" << endl;
-            cout << "Nama barang\t: " << barang[i].nama << endl;
-            cout << "Harga barang\t: " << barang[i].harga << endl;
-            found = true;
-        }
-    }
-    if (!found) {
-        cout << "Data tidak ditemukan." << endl;
-    }  
-    
-}
 void inputData() {
-    cout << "Masukkan jumlah data: ";
-    cin >> jumlahData;
-    for (int i = 0; i < jumlahData; i++) {
+    int tambahData;
+    cout << "Masukkan jumlah data yang ingin ditambah: ";
+    cin >> tambahData;
+
+    if (jumlahData + tambahData > 100) {
+        cout << "Data melebihi kapasitas maksimum (100).\n";
+        return;
+    }
+
+    for (int i = 0; i < tambahData; i++) {
         cout << "Masukkan nama barang: ";
-        cin >> barang[i].nama;
+        cin >> barang[jumlahData].nama;
         cout << "Masukkan harga barang: ";
-        cin >> barang[i].harga;
+        cin >> barang[jumlahData].harga;
+        jumlahData++; // Data baru ditambah
     }
 }
 void tampilData() {
@@ -92,11 +83,12 @@ void binary_search(string key) {
         int tengah = kiri + (kanan - kiri) / 2;
 
         if (barang[tengah].nama == key) {
-            cout << "\nData ditemukan:" << endl;
+            cout << "\n";
+            cout << "Data ditemukan:" << endl;
             cout << "Nama barang\t: " << barang[tengah].nama << endl;
-            cout << "\nHarga barang\t: " << barang[tengah].harga << endl;
+            cout << "Harga barang\t: " << barang[tengah].harga << endl;
             found = true;
-            break; // langsung keluar jika ketemu
+            break; // langsung keluar kalo ketemu
         }
         if (barang[tengah].nama < key) {
             kiri = tengah + 1; // cari ke kanan
@@ -108,6 +100,22 @@ void binary_search(string key) {
     if (!found) {
         cout << "Data tidak ditemukan." << endl;
     }   
+}
+void sequential_search(int key) {
+    bool found = false;
+    for (int i = 0; i < jumlahData; i++) {
+        if (barang[i].harga == key ) {
+            cout << "\n";
+            cout << "Data ditemukan:" << endl;
+            cout << "Nama barang\t: " << barang[i].nama << endl;
+            cout << "Harga barang\t: " << barang[i].harga << endl;
+            found = true;
+        }
+    }
+    if (!found) {
+        cout << "Data tidak ditemukan." << endl;
+    }  
+    
 }
 void menu(){
     int pilih;
